@@ -80,6 +80,11 @@ def users_list(request:Request):
     return templates.TemplateResponse("users/list.html", {"request": request, "users": users})
 
 
+@app.get("api/users")
+def api_users_list():
+    users = User.select()
+    return list(users)
+
 @app.get("/users/create")
 def user_create(name: str = Form(), birthday:date = Form()):
     user = User(name=name, birthday=birthday)
